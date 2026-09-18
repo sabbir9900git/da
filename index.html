@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>A Little Question For You 💗</title>
+
+<!-- Google Fonts: Fraunces (warm display serif) + Quicksand (soft rounded body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="style.css" />
+
+<!-- Cute emoji favicon, no external image needed -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>" />
+</head>
+<body>
+
+  <!-- Floating decorative background layer (hearts + sparkles injected by JS) -->
+  <div class="floaty-layer" id="floatyLayer" aria-hidden="true"></div>
+
+  <main class="stage">
+
+    <!-- ============================= -->
+    <!-- PAGE 1 — THE INVITATION       -->
+    <!-- ============================= -->
+    <section class="page page--active" id="page1" aria-label="Date invitation">
+      <div class="keepsake-card entrance">
+
+        <div class="sticker sticker--bear" aria-hidden="true">🧸</div>
+        <div class="sticker sticker--bow" aria-hidden="true">🎀</div>
+        <div class="sticker sticker--star sticker--star-a" aria-hidden="true">✨</div>
+        <div class="sticker sticker--star sticker--star-b" aria-hidden="true">⭐</div>
+        <div class="sticker sticker--flower" aria-hidden="true">🌸</div>
+
+        <p class="eyebrow-note">psst... a little note for you</p>
+
+        <h1 class="question">
+          Would you be up for going on a<br class="br-desktop" />
+          cute little date with me? 🥹
+        </h1>
+
+        <p class="subtitle">No pressure. Okay, maybe a little pressure. 👉👈</p>
+
+        <div class="button-row" id="buttonRow">
+          <button class="btn btn--yes" id="yesBtn1" type="button">Yes 💗</button>
+          <button class="btn btn--no" id="noBtn" type="button">No 🙈</button>
+        </div>
+
+        <p class="no-reaction" id="noReaction" aria-live="polite"></p>
+      </div>
+
+      <!-- Yes success overlay -->
+      <div class="success-overlay" id="successOverlay" aria-hidden="true">
+        <div class="success-card">
+          <div class="success-heart">💗</div>
+          <p class="success-text">Yayyy! You just made me the happiest person! 🥹💗</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- PAGE 2 — CHOOSE THE DAY       -->
+    <!-- ============================= -->
+    <section class="page" id="page2" aria-label="Choose a date">
+      <div class="keepsake-card">
+        <div class="sticker sticker--flower sticker--flower-2" aria-hidden="true">🌷</div>
+        <div class="sticker sticker--star sticker--star-c" aria-hidden="true">✨</div>
+
+        <p class="eyebrow-note">step one</p>
+        <h2 class="heading">Yay! Let's plan our little date! 💗</h2>
+        <p class="subtitle">Choose a day that feels perfect for us. 🥹✨</p>
+
+        <label class="field-label" for="dateInput">Our date</label>
+        <input class="date-input" type="date" id="dateInput" required />
+        <p class="picked-preview" id="datePreview" aria-live="polite"></p>
+        <p class="field-hint" id="dateHint"></p>
+
+        <div class="nav-row">
+          <button class="btn btn--ghost" id="backTo1" type="button">← Back</button>
+          <button class="btn btn--yes" id="continueToTime" type="button" disabled>Continue 💕</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- PAGE 3 — CHOOSE THE TIME      -->
+    <!-- ============================= -->
+    <section class="page" id="page3" aria-label="Choose a time">
+      <div class="keepsake-card">
+        <div class="sticker sticker--bow sticker--bow-2" aria-hidden="true">🎀</div>
+        <div class="sticker sticker--heart-deco" aria-hidden="true">💌</div>
+
+        <p class="eyebrow-note">step two</p>
+        <h2 class="heading">What time should we go on our little date? 🥰</h2>
+        <p class="subtitle">Pick a time that works best for you. 💗</p>
+
+        <div class="chosen-date-chip" id="chosenDateChip"></div>
+
+        <div class="time-picker" role="group" aria-label="Choose time">
+          <div class="time-wheel">
+            <label class="time-wheel-label" for="hourSelect">Hour</label>
+            <select class="time-select" id="hourSelect"></select>
+          </div>
+          <div class="time-colon" aria-hidden="true">:</div>
+          <div class="time-wheel">
+            <label class="time-wheel-label" for="minuteSelect">Minute</label>
+            <select class="time-select" id="minuteSelect"></select>
+          </div>
+          <div class="ampm-toggle" role="group" aria-label="AM or PM">
+            <button class="ampm-btn ampm-btn--active" id="amBtn" type="button" data-period="AM">AM</button>
+            <button class="ampm-btn" id="pmBtn" type="button" data-period="PM">PM</button>
+          </div>
+        </div>
+
+        <p class="picked-preview" id="timePreview" aria-live="polite"></p>
+
+        <div class="nav-row">
+          <button class="btn btn--ghost" id="backTo2" type="button">← Back</button>
+          <button class="btn btn--yes" id="confirmDate" type="button">Confirm Our Date 💖</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- PAGE 4 — FINAL CONFIRMATION   -->
+    <!-- ============================= -->
+    <section class="page" id="page4" aria-label="Date confirmed">
+      <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
+      <div class="keepsake-card keepsake-card--final">
+        <div class="sticker sticker--bear sticker--bear-2" aria-hidden="true">🧸</div>
+        <div class="sticker sticker--flower" aria-hidden="true">🌸</div>
+        <div class="sticker sticker--star sticker--star-d" aria-hidden="true">⭐</div>
+
+        <div class="big-heart" aria-hidden="true">💗</div>
+
+        <p class="eyebrow-note">it's official</p>
+        <h2 class="heading">It's a date! 🥹💗</h2>
+
+        <div class="final-details">
+          <div class="final-detail-row">
+            <span class="final-detail-icon" aria-hidden="true">📅</span>
+            <span class="final-detail-text" id="finalDate"></span>
+          </div>
+          <div class="final-detail-row">
+            <span class="final-detail-icon" aria-hidden="true">🕰️</span>
+            <span class="final-detail-text" id="finalTime"></span>
+          </div>
+        </div>
+
+        <p class="final-message">I can't wait to spend a beautiful little moment with you. 💕✨</p>
+
+        <div class="nav-row nav-row--final">
+          <button class="btn btn--ghost btn--small" id="changeDateBtn" type="button">Change Date</button>
+          <button class="btn btn--ghost btn--small" id="changeTimeBtn" type="button">Change Time</button>
+        </div>
+        <div class="nav-row nav-row--final">
+          <button class="btn btn--outline btn--small" id="copyBtn" type="button">Copy details 📋</button>
+          <button class="btn btn--outline btn--small" id="shareBtn" type="button">Share on WhatsApp 💬</button>
+        </div>
+        <button class="start-again" id="startAgainBtn" type="button">Start again</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
